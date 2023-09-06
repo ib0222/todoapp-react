@@ -3,7 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-function Todos({todos,onDeleteTodo,done,editWindow,setEditWindow}) {
+function Todos({todos,onDeleteTodo,done,editWindow,setEditWindow,onEditTodo}) {
   return (
     <div className='todos-container'>
 
@@ -13,7 +13,7 @@ function Todos({todos,onDeleteTodo,done,editWindow,setEditWindow}) {
       <hr/>
       <div className='edit-note'>
         <button ><CheckCircleIcon color='action' /></button>
-        <button onClick={() => setEditWindow(!editWindow)}><EditIcon color='primary'/></button>
+        <button onClick={() => onEditTodo(index)}><EditIcon color='primary'/></button>
         <button onClick={() => {onDeleteTodo(index)}}><DeleteIcon sx={{ color: 'red' }}/></button>
       </div>
     </div>
