@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./App.css";
 import AddTodo from "./components/AddTodo";
 import Header from "./components/Header";
@@ -32,10 +31,16 @@ function App() {
     setTodos(updatedTodos);
   }
 
-  function editTodo(indexToEdit) {
-    const todoToEdit = todos[indexToEdit];
-    setSelectedTodo(todoToEdit); // Set the selectedTodo to the todo you want to edit
-    setEditWindow(true); // Open the edit window
+  function editTodo(idToEdit, editedValue) {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) => {
+        if (todo.id === idToEdit) {
+          return { ...todo, message: editedValue };
+        }
+        return todo;
+      });
+    });
+    setEditWindow(true); // Close the edit window
   }
 
   return (
@@ -54,8 +59,15 @@ function App() {
         setEditWindow={setEditWindow}
         editWindow={editWindow}
         onEditTodo={editTodo}
+        setSelectedTodo={setSelectedTodo}
       />
-      {editWindow && <EditTodo setEditWindow={setEditWindow} selectedTodo={selectedTodo} />}
+      {editWindow && (
+        <EditTodo
+          setEditWindow={setEditWindow}
+          selectedTodo={selectedTodo}
+          onEditTodo={editTodo}
+        />
+      )}
     </>
   );
 }
