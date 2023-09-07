@@ -3,7 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-function Todos({todos,onDeleteTodo,done,editWindow,setEditWindow,onEditTodo}) {
+function Todos({todos,onDeleteTodo,done,onEditTodo}) {
   return (
     <div className='todos-container'>
 

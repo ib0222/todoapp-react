@@ -20,7 +20,6 @@ function EditTodo({ setEditWindow,selectedTodo }) {
             type="email"
             fullWidth
             variant="standard"
-            
           />
         </DialogContent>
       </Dialog>
