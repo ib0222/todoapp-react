@@ -4,7 +4,10 @@ import AddTodo from "./components/AddTodo";
 import Header from "./components/Header";
 import Todos from "./components/Todos";
 import EditTodo from "./components/EditTodo";
+import SignIn from "./components/SignIn";
 function App() {
+  const [signIn, setSignIn] = useState(false);
+
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState([]);
 
@@ -14,15 +17,12 @@ function App() {
   const [selectedTodo, setSelectedTodo] = useState(null);
 
   function addTodo() {
-    setTodos([
-      ...todos,
-      {
-        message: inputValue,
-        done: false,
-        id: Math.floor(Math.random() * 10000),
-      },
-    ]);
-    console.log(todos);
+    const newTodo = {
+      message: inputValue,
+      done: false,
+      id: Math.floor(Math.random() * 10000),
+    };
+    setTodos([...todos, newTodo]);
     setInputValue("");
   }
   function deleteTodo(indexToDelete) {
@@ -43,7 +43,7 @@ function App() {
     setEditWindow(true); // Close the edit window
   }
 
-  return (
+  return signIn ? (
     <>
       <Header />
       <AddTodo
@@ -55,10 +55,7 @@ function App() {
         todos={todos}
         onDeleteTodo={deleteTodo}
         done={done}
-        setDone={setDone}
         setEditWindow={setEditWindow}
-        editWindow={editWindow}
-        onEditTodo={editTodo}
         setSelectedTodo={setSelectedTodo}
       />
       {editWindow && (
@@ -69,6 +66,8 @@ function App() {
         />
       )}
     </>
+  ) : (
+    <SignIn />
   );
 }
 

@@ -8,7 +8,7 @@ function EditTodo({ setEditWindow, selectedTodo, onEditTodo }) {
   const handleApprove = () => {
     // Update the todos array with the edited value
     onEditTodo(selectedTodo.id, editedTodo);
-  
+
     // Close the edit window
     setEditWindow(false);
   };

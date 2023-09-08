@@ -13,7 +13,7 @@ function Todos({
   return (
     <div className="todos-container">
       {todos.map((todo, index) => (
-        <div className="todo" key={index}>
+        <div className={`todo ${todo.animationClass}`} key={index}>
           <p
             style={
               done
