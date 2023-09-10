@@ -2,7 +2,6 @@ import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-
 function Todos({
   todos,
   onDeleteTodo,
@@ -10,6 +9,7 @@ function Todos({
   setEditWindow,
   setSelectedTodo
 }) {
+
   return (
     <div className="todos-container">
       {todos.map((todo, index) => (

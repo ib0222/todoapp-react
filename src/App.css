@@ -14,6 +14,9 @@ body{
     margin-top:20px;
     font-family:cursive
 }
+.header-container div:nth-child(2){
+  color: blue;
+}
 .addtodo-container{
     display: flex;
     justify-content: center;

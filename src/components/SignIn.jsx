@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { auth } from "../firebase";
-function SignIn({ setSignIn }) {
+function SignIn({ setSignIn,logout }) {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
@@ -44,7 +45,7 @@ function SignIn({ setSignIn }) {
     }
   }
 
-  async function logout() {}
+  
 
   return (
     <div className="sign-in-container">
