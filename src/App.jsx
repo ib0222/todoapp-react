@@ -67,7 +67,7 @@ function App() {
       )}
     </>
   ) : (
-    <SignIn />
+    <SignIn setSignIn={setSignIn}/>
   );
 }
 
