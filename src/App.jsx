@@ -40,6 +40,25 @@ function App() {
     }
   }
 
+  function getDoneTodo(idToToggleDone) {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) => {
+        if (todo.id === idToToggleDone) {
+          return { ...todo, done: !todo.done }; // Toggle the "done" property
+        }
+        return todo;
+      });
+    });
+    if (signIn) {
+      const updatedTodos = todos.map((todo) => {
+        if (todo.id === idToToggleDone) {
+          return { ...todo, done: !todo.done };
+        }
+        return todo;
+      });
+      updateFirestoreTodos(updatedTodos);
+    }
+  }
   function editTodo(idToEdit, editedValue) {
     setTodos((prevTodos) => {
       return prevTodos.map((todo) => {
@@ -114,6 +133,8 @@ function App() {
         done={done}
         setEditWindow={setEditWindow}
         setSelectedTodo={setSelectedTodo}
+        setDone={setDone}
+        getDoneTodo={getDoneTodo}
       />
       {editWindow && (
         <EditTodo

@@ -8,8 +8,9 @@ function Header() {
 
   return (
     <div className='header-container'>
+        <div className='signout-btn'><button onClick={logout}>Sign out</button></div>
+        <div className='nickname'><p>{auth.currentUser.email}</p></div>
         <h1 style={{fontSize:'60px'}}>TODO App</h1>
-        <button onClick={logout}>Sign out</button>
     </div>
   )
 }
