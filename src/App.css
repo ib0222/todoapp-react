@@ -198,3 +198,18 @@ margin: 5px 20px;
   left: 50%;
   transform: translate(-50%,-5%);
 }
+
+.alert-message{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+@media only screen and (max-width: 800px){
+  .alert-message{
+    right: 20%;
+  }
+
+}

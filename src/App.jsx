@@ -1,14 +1,14 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
+import { Alert } from "@mui/material";
 import AddTodo from "./components/AddTodo";
 import Header from "./components/Header";
 import Todos from "./components/Todos";
 import EditTodo from "./components/EditTodo";
 import SignIn from "./components/SignIn";
-import { auth,db } from "./firebase";
+import { auth, db } from "./firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 function App() {
-  
   const [signIn, setSignIn] = useState(false);
 
   const [inputValue, setInputValue] = useState("");
@@ -19,17 +19,27 @@ function App() {
 
   const [selectedTodo, setSelectedTodo] = useState(null);
 
+  const [emptyTodo, setEmptyTodo] = useState(false);
+
   function addTodo() {
-    const newTodo = {
-      message: inputValue,
-      done: false,
-      id: Math.floor(Math.random() * 10000),
-    };
-    setTodos([...todos, newTodo]);
-    setInputValue("");
-    if(signIn){
-      updateFirestoreTodos([...todos, newTodo]);
+    if (inputValue.trim() !== "") {
+      const newTodo = {
+        message: inputValue,
+        done: false,
+        id: Math.floor(Math.random() * 10000),
+      };
+      setTodos([...todos, newTodo]);
+      
+      if (signIn) {
+        updateFirestoreTodos([...todos, newTodo]);
+      }
+    } else {
+      setEmptyTodo(true);
     }
+    setTimeout(() => {
+      setEmptyTodo(false);
+    }, 1000);
+    setInputValue("");
   }
   function deleteTodo(indexToDelete) {
     const updatedTodos = [...todos];
@@ -118,9 +128,20 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-
   return signIn ? (
     <>
+      {emptyTodo && (
+        <div className="alert-message">
+          <Alert
+            variant="filled"
+            severity="error"
+            style={{ width: "50%", display: "flex", justifyContent: "center" }}
+          >
+            Please add a todo!
+          </Alert>
+        </div>
+      )}
+
       <Header />
       <AddTodo
         inputValue={inputValue}
@@ -145,7 +166,7 @@ function App() {
       )}
     </>
   ) : (
-    <SignIn setSignIn={setSignIn}/>
+    <SignIn setSignIn={setSignIn} />
   );
 }
 
