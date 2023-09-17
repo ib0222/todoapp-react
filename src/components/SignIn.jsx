@@ -18,20 +18,19 @@ function SignIn({ setSignIn, logout }) {
         registerEmail,
         registerPassword
       );
-      console.log(user);
       setRegisterEmail("");
       setRegisterPassword("");
       setSignIn(true);
     } catch (e) {
-      console.log(e)
       if ((e.message = "auth/invalid-email")) {
 
         setErrorPage(true)
-        setInterval(() => {
-          setErrorPage(false)  
-        }, 2000);
+
       }
     }
+    setTimeout(() => {
+      setErrorPage(false)  
+    }, 1000);
   };
 
   async function login() {
@@ -49,10 +48,11 @@ function SignIn({ setSignIn, logout }) {
       if ((e.message = "auth/invalid-email")) {
 
         setErrorPage(true)
-        setInterval(() => {
-          setErrorPage(false)  
-        }, 2000);
+       
       }
+      setTimeout(() => {
+        setErrorPage(false)  
+      }, 1000);
       // auth/invalid-email -- for invalid email
       // auth/user-not-found -- user not found in database
     }
