@@ -191,3 +191,10 @@ justify-content: end;
 .nickname p{
 margin: 5px 20px;
 }
+
+.error-page{
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%,-5%);
+}

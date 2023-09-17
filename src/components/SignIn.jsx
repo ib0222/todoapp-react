@@ -4,12 +4,13 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../firebase";
-function SignIn({ setSignIn,logout }) {
+import { Alert } from "@mui/material";
+function SignIn({ setSignIn, logout }) {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
+  const [errorPage, setErrorPage] = useState(false);
   const register = async () => {
     try {
       const user = await createUserWithEmailAndPassword(
@@ -21,8 +22,15 @@ function SignIn({ setSignIn,logout }) {
       setRegisterEmail("");
       setRegisterPassword("");
       setSignIn(true);
-    } catch (error) {
-      console.log(error.message);
+    } catch (e) {
+      console.log(e)
+      // if ((e.message = "auth/invalid-email")) {
+
+      //   setErrorPage(true)
+      //   setInterval(() => {
+      //     setErrorPage(false)  
+      //   }, 2000);
+      // }
     }
   };
 
@@ -38,16 +46,26 @@ function SignIn({ setSignIn,logout }) {
       setLoginPassword("");
       setSignIn(true);
     } catch (e) {
-      console.log(e)
+      if ((e.message = "auth/invalid-email")) {
+
+        setErrorPage(true)
+        setInterval(() => {
+          setErrorPage(false)  
+        }, 2000);
+      }
       // auth/invalid-email -- for invalid email
       // auth/user-not-found -- user not found in database
     }
   }
 
-  
-
   return (
     <div className="sign-in-container">
+      {errorPage && (
+        <div className="error-page">
+          <Alert severity="error">Invalid Email or Password</Alert>
+        </div>
+      )}
+
       <div className="sign-in">
         <h1>Sign In</h1>
         <input
