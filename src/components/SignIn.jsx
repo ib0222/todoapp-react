@@ -24,13 +24,13 @@ function SignIn({ setSignIn, logout }) {
       setSignIn(true);
     } catch (e) {
       console.log(e)
-      // if ((e.message = "auth/invalid-email")) {
+      if ((e.message = "auth/invalid-email")) {
 
-      //   setErrorPage(true)
-      //   setInterval(() => {
-      //     setErrorPage(false)  
-      //   }, 2000);
-      // }
+        setErrorPage(true)
+        setInterval(() => {
+          setErrorPage(false)  
+        }, 2000);
+      }
     }
   };
 
